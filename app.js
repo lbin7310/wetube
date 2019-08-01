@@ -21,8 +21,8 @@ app.use(morgan("dev"));
 // local middleware를 통해서 global 변수를 접근한다.
 app.use(localMiddleware)
 
-app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter)
+app.use(routes.home, globalRouter);
 
 export default app;
