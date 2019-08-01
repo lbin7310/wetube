@@ -1,12 +1,19 @@
 // Videos
 
-export const join = (req, res) => res.send("Join");
-export const login = (req, res) => res.send("Login");
-export const logout = (req, res) => res.send("Logout");
+export const join = (req, res) => 
+  res.render("Join", { pageTitle: "Join" });
+export const login = (req, res) => 
+  res.render("Login", { pageTitle: "Login" });
+export const logout = (req, res) => 
+  res.render("Logout", { pageTitle: "Logout" });
 
 // Users
 
-export const users = (req, res) => res.send("Users");
-export const userDetail = (req, res) => res.send("User Detail");
-export const editProfile = (req, res) => res.send("Edit Profile");
-export const changePassword = (req, res) => res.send("Change Password");
+export const users = (req, res) => 
+  res.render("Users", { pageTitle: "Users" });
+export const userDetail = (req, res) => 
+  res.render("User Detail", { pageTitle: "User Detail" });
+export const editProfile = (req, res) => 
+  res.render("editProfile", { pageTitle: "Edit Profile" });
+export const changePassword = (req, res) => 
+  res.render("changePassword", { pageTitle: "Change Password" });
