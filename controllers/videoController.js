@@ -5,7 +5,7 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
   // await는 다음 과정이 끝날 때까지 잠시 기다려 달라는 의마다.
   try {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({'_id': -1});
     res.render("Home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
@@ -13,10 +13,22 @@ export const home = async (req, res) => {
   }
 }
 
-export const search = (req, res) => {
-  const { query: {term: searchingBy} } = req;
+// Search
+
+export const search = async (req, res) => {
+  const { 
+    query: { term: searchingBy }
+  } = req;
+  let videos = [];
+  try{
+    videos = await Video.find({title: { $regex: searchingBy, $options: "i"} })
+  }catch(error){
+    console.log(error)
+  }
   res.render("Search", { pageTitle: "Search", searchingBy, videos })
 };
+
+// Upload
 
 export const getUpload = (req, res) => {
   res.render("upload", { pageTitle: "Upload" });
@@ -36,7 +48,7 @@ export const postUpload = async (req, res) => {
   
 export const videoDetail = async (req, res) => {
   const {
-    params: {id}
+    params: { id }
   } = req;
   try {
     const video = await Video.findById(id);
