@@ -6,11 +6,17 @@ const multerVideo = multer({dest: "uploads/videos/" }) // upload한 파일을 �
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
-  res.locals.user = {
-    isAuthenticated: false,
-    id: 1
-  }
+  res.locals.user = req.user || null;
+  console.log(req.user);
   next();
+}
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
 }
 
 export const uploadVideo = multerVideo.single('videoFile');
