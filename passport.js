@@ -16,6 +16,13 @@ passport.use(
   githubLoginCallback
 ));
 
+passport.serializeUser((user, done) => { 
+  done(null, user)
+});
+passport.deserializeUser((user, done) => { 
+  done(null, user)
+});
+
 passport.use(
   new KakaoStrategy({
     clientID: process.env.KAKAO_ID,
@@ -28,10 +35,4 @@ passport.use(
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// passport.serializeUser((user, done) => { 
-//   done(null, user)
-// });
-// passport.deserializeUser((user, done) => { 
-//   done(null, user)
-// });
 
